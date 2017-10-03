@@ -78,15 +78,16 @@ public class NewLoaderBot extends LinearOpMode {
                         //Boom controlling code
                         if(boom_limit.getState()){
                                 //Boom is not touching bottom limit
-                                boom_lift.setPower(this.gamepad1.right_stick_y);
+                                if(boom_lift.getCurrentPosition() < 130){
+                                        //Boom is not far back enough to tip
+                                        boom_lift.setPower(this.gamepad1.right_stick_y);
+                                }
                         } else {
                                 //Boom is touching bottom limit
                                 if(this.gamepad1.right_stick_y <= 0){
                                         boom_lift.setPower(this.gamepad1.right_stick_y);
                                 }
                         }
-
-                        //********ADD SAFEGUARD AGAINST TIPPING********************
 
                         //Movement controlling code
                         left_drive.setPower(this.gamepad1.left_stick_y - this.gamepad1.left_stick_x);
